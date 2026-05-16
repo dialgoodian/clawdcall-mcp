@@ -1,0 +1,48 @@
+{
+  "name": "clawdcall-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for ClawdCall, giving AI agents phone calls, SMS, numbers, and transcripts.",
+  "type": "module",
+  "bin": {
+    "clawdcall-mcp": "dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "clawdcall",
+    "mcp",
+    "model-context-protocol",
+    "telephony",
+    "phone",
+    "sms",
+    "voice",
+    "ai-agents",
+    "openclaw",
+    "claude-code"
+  ],
+  "author": "ClawdCall",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.13.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.8.0"
+  }
+}
