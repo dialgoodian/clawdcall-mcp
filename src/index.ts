@@ -32,7 +32,7 @@ function printHelp(): void {
 Run a ClawdCall MCP server over stdio.
 
 Environment:
-  CLAWDCALL_API_KEY    Required API key.
+  CLAWDCALL_API_KEY    API key required for call and transcript tools.
   CLAWDCALL_BASE_URL   Optional API base URL. Defaults to https://api.clawdcall.com.
 
 Usage:

@@ -15,12 +15,12 @@ export class ClawdCallApiError extends Error {
 }
 
 export interface ClawdCallClientOptions {
-  apiKey: string;
+  apiKey?: string;
   baseUrl?: string;
 }
 
 export class ClawdCallClient {
-  private readonly apiKey: string;
+  private readonly apiKey?: string;
   private readonly baseUrl: string;
 
   constructor(options: ClawdCallClientOptions) {
@@ -28,20 +28,24 @@ export class ClawdCallClient {
     this.baseUrl = normalizeBaseUrl(options.baseUrl ?? "https://api.clawdcall.com");
   }
 
-  async get(path: string, query?: Record<string, string | number | boolean | undefined>): Promise<JsonValue> {
-    return this.request("GET", path, undefined, query);
+  async get(
+    path: string,
+    query?: Record<string, string | number | boolean | undefined>,
+    options?: RequestOptions,
+  ): Promise<JsonValue> {
+    return this.request("GET", path, undefined, query, options);
   }
 
-  async post(path: string, body?: JsonObject): Promise<JsonValue> {
-    return this.request("POST", path, body);
+  async post(path: string, body?: JsonObject, options?: RequestOptions): Promise<JsonValue> {
+    return this.request("POST", path, body, undefined, options);
   }
 
-  async patch(path: string, body?: JsonObject): Promise<JsonValue> {
-    return this.request("PATCH", path, body);
+  async patch(path: string, body?: JsonObject, options?: RequestOptions): Promise<JsonValue> {
+    return this.request("PATCH", path, body, undefined, options);
   }
 
-  async delete(path: string): Promise<JsonValue> {
-    return this.request("DELETE", path);
+  async delete(path: string, options?: RequestOptions): Promise<JsonValue> {
+    return this.request("DELETE", path, undefined, undefined, options);
   }
 
   private async request(
@@ -49,8 +53,14 @@ export class ClawdCallClient {
     path: string,
     body?: JsonObject,
     query?: Record<string, string | number | boolean | undefined>,
+    options?: RequestOptions,
   ): Promise<JsonValue> {
     const url = new URL(`${this.baseUrl}${path.startsWith("/") ? path : `/${path}`}`);
+    const authenticated = options?.authenticated ?? true;
+
+    if (authenticated && !this.apiKey) {
+      throw new Error("CLAWDCALL_API_KEY is required for this tool");
+    }
 
     if (query) {
       for (const [key, value] of Object.entries(query)) {
@@ -63,7 +73,7 @@ export class ClawdCallClient {
     const response = await fetch(url, {
       method,
       headers: {
-        Authorization: `Bearer ${this.apiKey}`,
+        ...(authenticated ? { Authorization: `Bearer ${this.apiKey}` } : {}),
         "Content-Type": "application/json",
         "User-Agent": "clawdcall-mcp/0.1.0",
       },
@@ -86,4 +96,8 @@ export class ClawdCallClient {
 
 function normalizeBaseUrl(baseUrl: string): string {
   return baseUrl.replace(/\/+$/, "");
+}
+
+interface RequestOptions {
+  authenticated?: boolean;
 }

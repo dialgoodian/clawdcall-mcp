@@ -1,7 +1,7 @@
 {
   "name": "clawdcall-mcp",
   "version": "0.1.0",
-  "description": "MCP server for ClawdCall, giving AI agents phone calls, SMS, numbers, and transcripts.",
+  "description": "MCP server for ClawdCall's agent-facing phone execution API.",
   "type": "module",
   "bin": {
     "clawdcall-mcp": "dist/index.js"
@@ -25,7 +25,6 @@
     "model-context-protocol",
     "telephony",
     "phone",
-    "sms",
     "voice",
     "ai-agents",
     "openclaw",
