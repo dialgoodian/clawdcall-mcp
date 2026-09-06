@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.dialgoodian/clawdcall-mcp",
+  "title": "ClawdCall",
+  "description": "Give AI agents a phone layer for consent-based calls, transcripts, summaries, and outcomes.",
+  "version": "0.1.0",
+  "websiteUrl": "https://clawdcall.com/agents/?utm_source=official_mcp_registry&utm_medium=directory&utm_campaign=mcp_listing_blitz&utm_content=clawdcall",
+  "repository": {
+    "url": "https://github.com/dialgoodian/clawdcall-mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://gateway.clawdcall.com/mcp/"
+    }
+  ]
+}

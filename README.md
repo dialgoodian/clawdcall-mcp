@@ -1,19 +1,29 @@
 # ClawdCall MCP Server
 
+<!-- mcp-name: io.github.dialgoodian/clawdcall-mcp -->
+
 Give AI agents access to ClawdCall's agent-facing phone execution API through the Model Context Protocol.
 
 `clawdcall-mcp` exposes the confirmed ClawdCall workflow:
 
 - send signup OTP
 - verify signup OTP
-- place outbound calls
+- place expected outbound calls
 - fetch call transcripts
 
-The API base URL defaults to `https://api.clawdcall.com`.
+## Hosted Remote
 
-## Quick Start
+Connect compatible remote MCP clients to the Streamable HTTP endpoint:
 
-### 1. Add ClawdCall to your MCP client
+```text
+https://gateway.clawdcall.com/mcp/
+```
+
+The endpoint advertises OAuth protected-resource metadata. Existing ClawdCall integrations may also use an API key according to the [agent documentation](https://clawdcall.com/skill.md).
+
+## Local Stdio Package
+
+Add the published npm package to a local MCP client:
 
 ```json
 {
@@ -22,7 +32,7 @@ The API base URL defaults to `https://api.clawdcall.com`.
       "command": "npx",
       "args": ["-y", "clawdcall-mcp"],
       "env": {
-        "CLAWDCALL_API_KEY": "sk_live_your_key_here"
+        "CLAWDCALL_API_KEY": "your_clawdcall_api_key"
       }
     }
   }
@@ -40,7 +50,7 @@ For staging or self-hosted API routing:
       "command": "npx",
       "args": ["-y", "clawdcall-mcp"],
       "env": {
-        "CLAWDCALL_API_KEY": "sk_live_your_key_here",
+        "CLAWDCALL_API_KEY": "your_clawdcall_api_key",
         "CLAWDCALL_BASE_URL": "https://api.clawdcall.com"
       }
     }
@@ -48,12 +58,15 @@ For staging or self-hosted API routing:
 }
 ```
 
-## Example Prompts
+## Safe First Test
 
-- "Sign me up for ClawdCall and send a verification code."
-- "Verify this ClawdCall OTP and tell me what credential I need to store securely."
-- "Call this restaurant and ask if they have a table for two tonight."
-- "Fetch the transcript for this ClawdCall call ID."
+1. Open the [ClawdCall agent setup](https://clawdcall.com/agents/?utm_source=github&utm_medium=repository&utm_campaign=mcp_listing_blitz&utm_content=readme).
+2. Connect the hosted endpoint or local package from a compatible agent client.
+3. Ask the agent to call you or an expected internal recipient with a bounded task.
+4. Confirm the destination and task before allowing the call.
+5. Review the returned status, transcript evidence, summary, or structured outcome.
+
+ClawdCall is not intended for cold calling, robocalling, bulk outreach, emergency use, political outreach, or sensitive advice workflows.
 
 ## Tools
 
@@ -61,7 +74,7 @@ For staging or self-hosted API routing:
 | --- | --- | --- |
 | `send_signup_otp` | `POST /cc/signup/send-otp` | Send a phone verification OTP for signup. |
 | `verify_signup_otp` | `POST /cc/signup/verify-otp` | Verify the OTP and receive account/API-key details. |
-| `place_outbound_call` | `POST /external/v1/agent/outbound?conversionFlag=1` | Place an outbound voice-agent call. |
+| `place_outbound_call` | `POST /external/v1/agent/outbound?conversionFlag=1` | Place an expected outbound voice-agent call. |
 | `get_call_transcript` | `GET /cc/v1/calls/{id}/transcript` | Fetch a transcript by call ID or campaign ID. |
 
 ## Environment Variables
@@ -89,12 +102,19 @@ npm run build
 Run the built server:
 
 ```bash
-CLAWDCALL_API_KEY=sk_live_your_key_here npm start
+CLAWDCALL_API_KEY=your_clawdcall_api_key npm start
 ```
+
+## Discovery Metadata
+
+- [`server.json`](server.json) contains the Official MCP Registry metadata.
+- [Server card](https://www.clawdcall.com/.well-known/mcp/server-card.json)
+- [Agent-readable documentation](https://clawdcall.com/skill.md)
+- [OpenAPI description](https://clawdcall.com/.well-known/openapi.json)
 
 ## API Contract
 
-This server tracks the ClawdCall agent-facing OpenAPI contract currently published by the ClawdCall UI repo:
+This server tracks these ClawdCall agent-facing endpoints:
 
 - `POST /cc/signup/send-otp`
 - `POST /cc/signup/verify-otp`
