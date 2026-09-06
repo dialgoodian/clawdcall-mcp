@@ -1,0 +1,23 @@
+{
+  "name": "clawdcall-agent-examples",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "test": "node --test",
+    "openai": "node --env-file=.env openai-agents-sdk/index.mjs",
+    "langgraph": "node --env-file=.env langgraph-escalation/index.mjs",
+    "webhook": "node --env-file=.env webhook-to-call/server.mjs",
+    "send:webhook": "node --env-file=.env webhook-to-call/send-sample.mjs"
+  },
+  "dependencies": {
+    "@langchain/core": "^1.2.9",
+    "@langchain/openai": "^1.5.11",
+    "@openai/agents": "^0.17.0",
+    "langchain": "^1.5.10",
+    "zod": "^4.5.4"
+  }
+}

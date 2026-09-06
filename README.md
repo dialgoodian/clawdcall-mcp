@@ -68,6 +68,17 @@ For staging or self-hosted API routing:
 
 ClawdCall is not intended for cold calling, robocalling, bulk outreach, emergency use, political outreach, or sensitive advice workflows.
 
+## Copy-Paste Examples
+
+The [`examples`](examples) directory contains bounded first-call workflows for:
+
+- [MCP self-call](examples/mcp-self-call)
+- [OpenAI Agents SDK](examples/openai-agents-sdk)
+- [LangGraph-backed agents](examples/langgraph-escalation)
+- [Signed webhook-to-call alerts](examples/webhook-to-call)
+
+The code examples keep the recipient in operator-controlled environment variables. Agent-generated input cannot change the phone number, and live side effects require an explicit approval or opt-in.
+
 ## Tools
 
 | Tool | Confirmed endpoint | Description |
