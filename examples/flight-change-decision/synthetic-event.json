@@ -1,0 +1,36 @@
+{
+  "_fixture_note": "Synthetic self-test only. No real traveller, flight, fare, or booking is represented.",
+  "synthetic": true,
+  "decision_id": "synthetic-decision-042",
+  "trip_ref": "SYNTHETIC-TRIP-042",
+  "disruption_type": "cancelled",
+  "status_verified": true,
+  "options_current": true,
+  "call_opt_in": true,
+  "traveller_matches": true,
+  "decision_required": true,
+  "decision_resolved": false,
+  "expires_in_minutes": 20,
+  "safe_summary": "The synthetic evening flight was cancelled and two current alternatives require a preference.",
+  "allowed_answers": [
+    "tonight_connection",
+    "tomorrow_direct",
+    "hold"
+  ],
+  "options": [
+    {
+      "id": "tonight_connection",
+      "arrival_window": "tonight",
+      "connections": 1,
+      "price_delta": "RECHECK_BEFORE_ACTION"
+    },
+    {
+      "id": "tomorrow_direct",
+      "arrival_window": "tomorrow",
+      "connections": 0,
+      "price_delta": "RECHECK_BEFORE_ACTION"
+    }
+  ],
+  "test_target": "RESOLVE_YOUR_OWN_OPTED_IN_E164_NUMBER_FROM_TRUSTED_STORAGE",
+  "transaction_authorized": false
+}

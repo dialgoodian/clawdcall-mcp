@@ -76,6 +76,7 @@ The [`examples`](examples) directory contains bounded first-call workflows for:
 - [OpenAI Agents SDK](examples/openai-agents-sdk)
 - [LangGraph-backed agents](examples/langgraph-escalation)
 - [Signed webhook-to-call alerts](examples/webhook-to-call)
+- [Flight-change decision handoff](examples/flight-change-decision)
 
 The code examples keep the recipient in operator-controlled environment variables. Agent-generated input cannot change the phone number, and live side effects require an explicit approval or opt-in.
 

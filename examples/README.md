@@ -8,6 +8,7 @@ These examples turn a specific agent event into one bounded ClawdCall action. St
 | [OpenAI Agents SDK](openai-agents-sdk) | OpenAI agent applications | SDK human-in-the-loop approval |
 | [LangGraph escalation](langgraph-escalation) | LangChain and LangGraph workflows | Terminal approval plus fixed recipient |
 | [Webhook to call](webhook-to-call) | Internal automation and alerting | Signed requests and dry-run default |
+| [Flight-change decision](flight-change-decision) | Travel-agent decision handoffs | Synthetic event, fixed recipient, terminal approval, no booking |
 
 ## Install
 

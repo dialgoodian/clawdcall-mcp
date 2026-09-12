@@ -8,6 +8,7 @@
   "scripts": {
     "check": "node scripts/check.mjs",
     "test": "node --test",
+    "flight": "node --env-file=.env flight-change-decision/index.mjs",
     "openai": "node --env-file=.env openai-agents-sdk/index.mjs",
     "langgraph": "node --env-file=.env langgraph-escalation/index.mjs",
     "webhook": "node --env-file=.env webhook-to-call/server.mjs",
